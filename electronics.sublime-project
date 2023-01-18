@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+        {
+            "file_exclude_patterns":
+            [
+                "*.log",
+                "*.pdf",
+                "*.aux",
+                "*.md5",
+                "*.dpth",
+                "*.auxlock",
+                "*.toc",
+                "*.png",
+                "*.jpg",
+                "*.sublime-project"
+            ],
+            "path": "."
+        }
+	]
+}
