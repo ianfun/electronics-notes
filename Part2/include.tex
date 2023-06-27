@@ -1,0 +1,64 @@
+\begin{titlepage}
+	\begin{circuitikz}[remember picture,overlay,inner sep=0,outer sep=0, xshift=3cm, yshift=-2cm, opacity=0.7]
+  \ctikzset{resistors/scale=0.6}
+  \ctikzset{capacitors/scale=0.6}
+  \node[op amp] at (0, 0) (A) {};
+  \draw (A.-)
+  to [R=$R_1$, *-] ++(-2, 0) node[ground] {};
+  \draw (A.-)
+  to [short] ++(0, 1)
+  to [R=$R_2$] ++(2.5, 0)
+  to [short, -*] ++(0, -1.5) coordinate (X);
+  \draw (A.out)
+  to [short, -o] ++(1.5, 0) node[right] {$V_o$};
+  \draw (X)
+  to [short] ++(0, -1.5)
+  to [R=$R$] ++(-1.3, 0)
+  to [C=$C$] ++(-1.2, 0) coordinate (Y);
+  \draw (Y) to [C, l_=$C$] ++(0, -1.2) node[ground] {};
+  \draw (Y) to [short] ++(-1.2, 0) to [R, l_=$R$] ++(0, -1.2) node[ground] {};
+  \draw (A.+) to [short, -*] (Y);
+\end{circuitikz}\begin{circuitikz}[remember picture,overlay,inner sep=0,outer sep=0, yshift=-1cm, xshift=13cm, opacity=0.7]
+  \node[pmos, tr circle] at (1, -1) (A) {}; 
+  \draw[short] (A.G) to [short] ++(-0.3, 0) node[ground] {};
+  \draw[short] (A.D)
+  to [short] ++(0, -0.5)
+  to [short, *-o] ++(0.5, 0) node [right]{$Y=A + \overline{B}C$};
+  \draw[short] (A.S)
+  to[short, -o] ++(0, 0.5) node[above] {$V_{DD}$};
+  
+  \node[nmos, tr circle] at (1, -3) (X) {};
+  \node[nmos, tr circle] at (1, -5) (Y) {};
+  \node[nmos, tr circle] at (-0.7, -5) (Z) {};
+  \draw[short] (X.S)
+  to [short] (Y.D);
+  \draw[short] (Z.D)
+  to [short, -*] ++(1.7, 0);
+  \node[left] at (X.G) {$\overline{A}$};
+  \node[left] at (Y.G) {$\overline{C}$};
+  \node[left] at (Z.G) {$B$};
+  \draw[short] (Z.S)
+  to[short, -*] (Y.S)
+  to[short] ++(0, -0.2) node[ground] {};
+\end{circuitikz}\begin{circuitikz}[remember picture,overlay,inner sep=0,outer sep=0, xshift=3cm, yshift=-15cm, opacity=0.7]
+  \ctikzset{resistors/scale=0.7}
+  \ctikzset{batteries/scale=0.7}
+  \ctikzset{capacitors/scale=0.6}
+  \node[nmos, tr circle] at (0, 0) (A) {};
+  \draw (A.S) to [short] ++(0, -1.5) node[ground] {};
+  \draw (A.D) to [C=$C_D$, *-o] ++(1.2, 0) node[right] {$V_o$}; 
+  \draw (A.D) to [short, -o] ++(0, 1.5) node[above] {$+V_{DD}$};
+  \draw (A.G) to [short] ++(-0.7, 0) coordinate (X);
+  \draw (X) to [R=$R_G$] ++(0, -1.3) to [battery, v=$V_{GG}$] ++(0, -1) node[ground] {};
+  \draw (X) to [C=$C_G$, *-o] ++(-1.2, 0) node[left] {$V_i$};
+\end{circuitikz}\begin{center}
+    \vspace{\fill}
+
+    {\Huge 電子學筆記}\vspace{\fill}
+
+    {\Large 林亦恩}\vspace{\fill}
+
+    \today
+    \vspace{\fill}
+  \end{center}
+\end{titlepage}

@@ -1,0 +1,103 @@
+\setmathrm[]{Latin Modern Math}
+\usepackage{tikz}
+\usepackage[american]{circuitikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\pgfplotsset{compat=1.18}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{steinmetz}
+\usepackage[]{empheq}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\cand}{\mathbin{\!/\mkern-5mu/\!}}
+%\usepgfplotslibrary{external}
+\usetikzlibrary{shapes.multipart}
+%\tikzexternalize
+\ctikzset{amplifiers/fill=cyan!30}
+\ctikzset{transistors/fill=cyan!30}
+\newcommand{\parallelsum}{\mathbin{\!/\mkern-5mu/\!}}
+\ctikzset{transistors/scale=0.9}
+\ctikzset{resistors/scale=0.8}
+\ctikzset{capacitors/scale=0.8}
+\ctikzset{logic ports/fill=cyan!15}
+\newtcolorbox{CE}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{CB}[1]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{CC}[1]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{CS}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{CG}[1]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{CD}[1]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title=#1}
+\definecolor{shadecolor}{cmyk}{0,0,0.41,0}
+\definecolor{light-blue}{cmyk}{0.25,0,0,0}
+\newsavebox{\mysaveboxM} % M for math
+\newsavebox{\mysaveboxT} % T for text
+\newcommand*\TitleBox[2][Example]{%
+	\sbox{\mysaveboxM}{#2}%
+	\sbox{\mysaveboxT}{\fcolorbox{black}{light-blue}{#1}}%
+	\sbox{\mysaveboxM}{%
+		\parbox[b][\ht\mysaveboxM+.5\ht\mysaveboxT+.5\dp\mysaveboxT][b]{%
+			\wd\mysaveboxM}{#2}%
+	}%
+	\sbox{\mysaveboxM}{%
+		\fcolorbox{black}{shadecolor}{%
+			\makebox[\linewidth-10em]{\usebox{\mysaveboxM}}%
+		}%
+	}%
+	\usebox{\mysaveboxM}%
+	\makebox[0pt][r]{%
+		\makebox[\wd\mysaveboxM][c]{%
+			\raisebox{\ht\mysaveboxM-0.5\ht\mysaveboxT
+				+0.5\dp\mysaveboxT-0.5\fboxrule}{\usebox{\mysaveboxT}}%
+		}%
+	}%
+}
+\newcommand*\BgBox[2][Example]{%
+	\sbox{\mysaveboxM}{#2}%
+	\sbox{\mysaveboxT}{}%
+	\sbox{\mysaveboxM}{%
+		\parbox[b][\ht\mysaveboxM+.5\ht\mysaveboxT+.5\dp\mysaveboxT][b]{%
+			\wd\mysaveboxM}{#2}%
+	}%
+	\sbox{\mysaveboxM}{%
+		\fcolorbox{black}{shadecolor}{%
+			\makebox[\linewidth-10em]{\usebox{\mysaveboxM}}%
+		}%
+	}%
+	\usebox{\mysaveboxM}%
+	\makebox[0pt][r]{%
+		\makebox[\wd\mysaveboxM][c]{%
+			\raisebox{\ht\mysaveboxM-0.5\ht\mysaveboxT
+				+0.5\dp\mysaveboxT-0.5\fboxrule}{\usebox{\mysaveboxT}}%
+		}%
+	}%
+}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\tikzset{
+  on each segment/.style={
+    decorate,
+    decoration={
+      show path construction,
+      moveto code={},
+      lineto code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+      curveto code={
+        \path [#1] (\tikzinputsegmentfirst)
+        .. controls
+        (\tikzinputsegmentsupporta) and (\tikzinputsegmentsupportb)
+        ..
+        (\tikzinputsegmentlast);
+      },
+      closepath code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+    },
+  },
+  mid arrow/.style={postaction={decorate,decoration={
+        markings,
+        mark=at position .5 with {\arrow[#1]{stealth}}
+      }}},
+}
+

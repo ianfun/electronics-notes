@@ -1,0 +1,79 @@
+\begin{tabular}{|c|c|}
+	\hline
+	\multicolumn{2}{|c|}{施密特觸發器} \\
+	\hline
+	\rule[-1ex]{0pt}{2.5ex} \begin{circuitikz}
+		\node[op amp] at (0, 0)(A){};
+		\draw (A.-) 
+		to [short, -o] ++(-1, 0) node[left] {$V_{s}$};
+		\draw (A.out)
+		to [short, -o] ++(1, 0) node[right] {$V_o$};
+		\draw (A.+)
+		to [short] ++(0, -1) coordinate (X);
+		\draw (X)
+		to [R=$R_1$] ++(-1.8, 0) node[ground] {};
+		\draw (X)
+		to [R=$R_2$, *-] ++(2.5, 0)
+		to [short, -*] ++(0, 1.48);
+		\node[draw] at (0, -2.2) {反向施密特觸發器};
+	\end{circuitikz} & \begin{circuitikz}
+	\node[op amp] at (0, 0)(A){};
+	\draw (A.-) 
+	to [short] ++(-1, 0) node[ground] {};
+	\draw (A.out)
+	to [short] ++(1, 0) node[right] {$V_o$};
+	\draw (A.+)
+	to [short] ++(0, -1) coordinate (X);
+	\draw (X)
+	to [R=$R_1$, -o] ++(-1.8, 0) node[left] {$V_s$};
+	\draw (X)
+	to [R=$R_2$, *-] ++(2.5, 0)
+	to [short, -*] ++(0, 1.48);
+	\node[draw] at (0, -2.2) {非反向施密特觸發器};
+\end{circuitikz} \\
+	\hline
+	\rule[-1ex]{0pt}{2.5ex} \begin{circuitikz}
+		\node[op amp] at (0, 0)(A){};
+		\draw (A.-) 
+		to [short, -o] ++(-1, 0) node[left] {$V_{s}$};
+		\draw (A.out)
+		to [short, -o] ++(1, 0) node[right] {$V_o$};
+		\draw (A.+)
+		to [short] ++(0, -1) coordinate (X);
+		\draw (X)
+		to [R=$R_1$, -o] ++(-1.8, 0) node[left] {$V_R$};
+		\draw (X)
+		to [R=$R_2$, *-] ++(2.5, 0)
+		to [short, -*] ++(0, 1.48);
+		\node[draw] at (0.4, -2.2) {反向施密特觸發器(加偏壓)};
+	\end{circuitikz} & \begin{circuitikz}
+	\node[op amp] at (0, 0)(A){};
+	\draw (A.-) 
+	to [short, -o] ++(-1, 0) node[left] {$V_R$};
+	\draw (A.out)
+	to [short] ++(1, 0) node[right] {$V_o$};
+	\draw (A.+)
+	to [short] ++(0, -1) coordinate (X);
+	\draw (X)
+	to [R=$R_1$, -o] ++(-1.8, 0) node[left] {$V_s$};
+	\draw (X)
+	to [R=$R_2$, *-] ++(2.5, 0)
+	to [short, -*] ++(0, 1.48);
+	\node[draw] at (0.4, -2.2) {非反向施密特觸發器};
+\end{circuitikz} \\
+	\hline
+\end{tabular}
+
+輸入/輸出特性曲線
+
+\begin{circuitikz}
+\draw[thick, ->] (0, -5) -- (0, 5) node[above] {$V_o$};
+\draw[thick, ->] (-5, 0) -- (5, 0) node[right] {$V_s$};
+\draw[postaction={on each segment={mid arrow=blue}}, thick, blue, ->] (-4, 4) -- ++(5, 0) -- ++(0, -8) -- (4, -4);
+\draw[postaction={on each segment={mid arrow=red}}, thick, red, ->] (4, -4) -- ++(-5, 0) -- ++(0, 8);
+\node[] at (2, 4) {$(V_{UT}, +V_{sat})$};
+\node[] at (-2, -4) {$(V_{LT}, -V_{sat})$};
+\draw[magenta, <->] (1, 4.2) -- (-1, 4.2);
+\node[magenta, above] at (0, 4.2) {$V_H$ 磁滯電壓};
+\end{circuitikz}
+
